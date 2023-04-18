@@ -1,6 +1,12 @@
 pipeline {
     agent { label 'node-agent' }
     
+    stage('Remove container') {
+            steps {
+                sh 'docker rm -f node-todo-app || true'
+            }
+        }
+    
     stages{
         stage('Code'){
             steps{
@@ -25,10 +31,6 @@ pipeline {
                 sh "docker-compose down && docker-compose up -d"
             }
         }
-        stage('Remove container') {
-            steps {
-                sh 'docker rm -f node-todo-app || true'
-            }
-        }
+        
     }
 }
