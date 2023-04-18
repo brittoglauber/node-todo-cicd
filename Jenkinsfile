@@ -25,5 +25,10 @@ pipeline {
                 sh "docker-compose down && docker-compose up -d"
             }
         }
+        stage('Remove container') {
+            steps {
+                sh 'docker rm -f node-todo-app || true'
+            }
+        }
     }
 }
